@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CAMPUS MAP & PICK-UP - Neust's Pedicab</title>
   <style>
-    /* CSS VARIABLES & RESET */
     :root {
       --primary: #023e8a;
       --primary-hover: #0077b6;
@@ -36,7 +35,6 @@
       padding-bottom: 40px;
     }
 
-    /* TOP COVER PICTURE BANNER */
     .top-cover-container {
       width: 100%;
       height: 340px;
@@ -58,7 +56,6 @@
       }
     }
 
-    /* HEADER & BRANDING */
     header {
       background-color: var(--card-bg);
       border-bottom: 2px solid var(--border);
@@ -122,7 +119,6 @@
       color: white;
     }
 
-    /* NAVIGATION DRAWER */
     nav {
       background-color: var(--card-bg);
       border-bottom: 2px solid var(--border);
@@ -169,14 +165,12 @@
       color: white;
     }
 
-    /* CONTAINER & PAGE SECTIONS */
     .container {
       max-width: 900px;
       margin: 24px auto;
       padding: 0 16px;
     }
 
-    /* CARDS */
     .card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -200,7 +194,6 @@
       gap: 10px;
     }
 
-    /* MAP CARD CONTAINER */
     .map-card-wrapper {
       background-color: var(--map-blue);
       border-radius: 12px;
@@ -238,7 +231,6 @@
       background-color: var(--map-blue);
     }
 
-    /* DIRECTORY TABLE STYLES */
     .directory-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -301,7 +293,6 @@
       min-width: 24px;
     }
 
-    /* FORMS */
     .form-group {
       margin-bottom: 18px;
     }
@@ -361,7 +352,7 @@
       cursor: pointer;
     }
 
-    /* STUDENT LIVE REQUEST TRACKING BOX */
+
     .tracking-box {
       background-color: #f0fdf4;
       border: 2px solid #bbf7d0;
@@ -377,7 +368,6 @@
       margin-bottom: 8px;
     }
 
-    /* ALERTS */
     .alert-success {
       background-color: #e6f4ea;
       color: var(--success);
@@ -393,21 +383,19 @@
 </head>
 <body onload="initMapPickupPage()">
 
-  <!-- COVER BANNER -->
   <div class="top-cover-container">
     <img 
       class="top-cover-img" 
-      src="af123bdf-e3b8-4a31-9b4d-8665803bd026_2.jpg" 
+      src="coverpic.jpe" 
       alt="Cover Photo ng Pedicab"
     />
   </div>
 
-  <!-- HEADER BRANDING & HAMBURGER MENU TOGGLE -->
   <header>
     <div class="brand">
       <img 
         class="brand-logo-img" 
-        src="294907598_424215026394117_510540427096584683_n.png" 
+        src="logo.png" 
         alt="Logo ng NEUST"
       />
       <div class="brand-text">
@@ -420,7 +408,6 @@
     </button>
   </header>
 
-  <!-- NAVIGATION DRAWER -->
   <nav id="main-nav">
     <a href="index.html" class="nav-btn">Home & Info</a>
     <a href="map-pickup.html" class="nav-btn active">Campus Map & Pick-up Request</a>
@@ -430,7 +417,6 @@
 
   <div class="container">
 
-    <!-- SCHEMATIC MAP CARD -->
     <div class="map-card-wrapper">
       <div class="map-header-bar">
         <h3>NEUST Sumacab Campus Map</h3>
@@ -440,13 +426,12 @@
         <img 
           id="campus-map" 
           class="map-img" 
-          src="Numbered Campus Map Schematic.png" 
+          src="map.png" 
           alt="Mapa ng NEUST Sumacab Campus"
         >
       </div>
     </div>
 
-    <!-- DIRECTORY LIST OF ALL 60 MAP NUMBERS & BUILDINGS (CLICK TO SELECT) -->
     <div class="card">
       <h2 class="card-title">Campus Building & Facility Directory</h2>
       <p style="margin-bottom: 12px; font-size: 0.9rem; color: var(--text-muted);">
@@ -455,7 +440,6 @@
 
       <div class="directory-grid">
         
-        <!-- ADMINISTRATION BUILDING -->
         <div class="directory-category">
           <h4>Administration Building</h4>
           <table class="directory-table">
@@ -479,7 +463,6 @@
           </table>
         </div>
 
-        <!-- SPORTS & CULTURAL -->
         <div class="directory-category">
           <h4>Sports, Fitness & Cultural</h4>
           <table class="directory-table">
@@ -504,7 +487,6 @@
           </table>
         </div>
 
-        <!-- CANTEENS & HALLS -->
         <div class="directory-category">
           <h4>Canteens, Gyms & Halls</h4>
           <table class="directory-table">
@@ -529,7 +511,6 @@
           </table>
         </div>
 
-        <!-- CHAPEL & STUDENT DEV -->
         <div class="directory-category">
           <h4>Chapel, Infirmary & Student Dev</h4>
           <table class="directory-table">
@@ -557,7 +538,6 @@
           </table>
         </div>
 
-        <!-- SCIENCE & TECHNOLOGY -->
         <div class="directory-category">
           <h4>Science & Technology</h4>
           <table class="directory-table">
@@ -578,7 +558,6 @@
           </table>
         </div>
 
-        <!-- COLLEGE BUILDINGS -->
         <div class="directory-category">
           <h4>College Buildings</h4>
           <table class="directory-table">
@@ -608,7 +587,6 @@
       </div>
     </div>
 
-    <!-- PICK-UP REQUEST FORM -->
     <div class="card" id="pickup-card">
       <h2 class="card-title">Request a Pedicab Pick-up</h2>
       <form id="pickup-form" onsubmit="handlePickupSubmit(event)">
@@ -651,7 +629,6 @@
         Pick-up request sent successfully! Authorized drivers can now view your request on the dashboard.
       </div>
 
-      <!-- LIVE STUDENT TRACKING BOX -->
       <div id="student-tracking-box" class="tracking-box">
         <h3>Your Request Status</h3>
         <p id="tracking-status-text" style="margin-bottom: 10px; font-weight: 600; font-size: 0.95rem;"></p>
@@ -664,7 +641,7 @@
   <script>
     function initMapPickupPage() {
       checkStudentTrackingState();
-      setInterval(syncStudentTrackingState, 2000); // Poll tracking state for live status updates from drivers
+      setInterval(syncStudentTrackingState, 2000);
     }
 
     function toggleMenu() {
@@ -684,7 +661,6 @@
       localStorage.setItem('pedicab_requests', JSON.stringify(requests));
     }
 
-    // AUTO-SELECT BUILDING ON CLICK & SCROLL TO FORM
     function selectBuilding(buildingName) {
       const locationInput = document.getElementById('pickup-location');
       locationInput.value = buildingName;
@@ -697,7 +673,6 @@
       document.getElementById('pickup-card').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // STUDENT SUBMIT PICK-UP REQUEST
     function handlePickupSubmit(e) {
       e.preventDefault();
       const studentName = document.getElementById('pickup-student-name').value.trim();
@@ -719,7 +694,6 @@
       currentRequests.unshift(newRequest);
       saveStoredRequests(currentRequests);
 
-      // Save active student tracking session ID in localStorage
       localStorage.setItem('my_active_request_id', newRequestId);
 
       const alertBox = document.getElementById('pickup-alert');
@@ -733,7 +707,6 @@
       checkStudentTrackingState();
     }
 
-    // CHECK & DISPLAY STUDENT REQUEST TRACKING
     function checkStudentTrackingState() {
       const activeId = localStorage.getItem('my_active_request_id');
       const trackingBox = document.getElementById('student-tracking-box');
@@ -770,7 +743,6 @@
       }
     }
 
-    // SYNC STUDENT TRACKING STATE PERIODICALLY
     function syncStudentTrackingState() {
       const trackingBox = document.getElementById('student-tracking-box');
       if (trackingBox && trackingBox.style.display === 'block') {
@@ -778,7 +750,6 @@
       }
     }
 
-    // CANCEL ACTIVE REQUEST
     function cancelMyRequest() {
       const activeId = localStorage.getItem('my_active_request_id');
       if (activeId) {
