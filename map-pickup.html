@@ -1,67 +1,267 @@
-<!-- CAMPUS MAP & PICK-UP REQUEST SECTION -->
-<section id="map-pickup" class="section-page active">
-      
-  <!-- SCHEMATIC MAP CARD -->
-  <div class="map-card-wrapper">
-    <div class="map-header-bar">
-      <h3>NEUST Sumacab Campus Map</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MAP & PICKUP - CAMPUS PEDICAB</title>
+  <style>
+    :root {
+      --primary: #023e8a;
+      --primary-hover: #0077b6;
+      --accent: #caf0f8;
+      --bg-light: #f4f8fc;
+      --card-bg: #ffffff;
+      --text-main: #1d2d44;
+      --text-muted: #576574;
+      --border: #d0e1f9;
+      --success: #2b9348;
+      --danger: #d90429;
+      --map-blue: #0b1c5c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; padding-bottom: 40px; }
+
+    .top-cover-container { width: 100%; height: 340px; overflow: hidden; background-color: var(--primary); }
+    .top-cover-img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+
+    header { background-color: var(--card-bg); border-bottom: 2px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-logo-img { width: 46px; height: 46px; object-fit: contain; border-radius: 50%; }
+    .brand-text h1 { font-size: 1.2rem; color: var(--primary); font-weight: 800; line-height: 1.1; }
+    .brand-text span { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+    .menu-toggle { background: none; border: 2px solid var(--primary); color: var(--primary); font-size: 1.4rem; width: 42px; height: 42px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .menu-toggle:hover { background-color: var(--primary); color: white; }
+
+    nav { background-color: var(--card-bg); border-bottom: 2px solid var(--border); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; display: flex; flex-direction: column; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    nav.show { max-height: 300px; }
+
+    .nav-btn { background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text-main); padding: 14px 24px; font-size: 1rem; font-weight: 600; text-align: left; text-decoration: none; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.2s, color 0.2s; }
+    .nav-btn:hover { background-color: var(--accent); color: var(--primary); }
+    .nav-btn.active { background-color: var(--primary); color: white; }
+
+    .container { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+    .card { background: var(--card-bg); border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); }
+    .card-title { font-size: 1.25rem; color: var(--primary); margin-bottom: 16px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; font-weight: 700; }
+
+    .map-card-wrapper { background-color: var(--map-blue); border-radius: 12px; padding: 20px; color: white; margin-bottom: 24px; border: 1px solid var(--border); }
+    .map-display-box { background-color: var(--map-blue); border-radius: 8px; overflow: hidden; text-align: center; padding: 4px; }
+    .map-img { width: 100%; height: auto; max-height: 650px; object-fit: contain; display: block; margin: 0 auto; border-radius: 4px; }
+
+    .directory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+    .directory-category { background-color: #f8fbfe; border-radius: 8px; padding: 16px; border: 1px solid var(--border); }
+    .directory-category h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 10px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+    .directory-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .directory-table th, .directory-table td { padding: 8px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .directory-table th { background-color: var(--accent); color: var(--primary); font-weight: 700; }
+    .directory-table tbody tr { cursor: pointer; transition: background-color 0.2s; }
+    .directory-table tbody tr:hover { background-color: #dbeafe; }
+
+    .num-badge { display: inline-block; background-color: #f59e0b; color: #000; font-weight: 800; padding: 2px 6px; border-radius: 12px; font-size: 0.75rem; text-align: center; min-width: 24px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
+    .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; background-color: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-control:focus, .form-control.highlighted { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(2, 62, 138, 0.2); }
+    textarea.form-control { resize: vertical; min-height: 90px; }
+
+    .btn-submit { background-color: var(--primary); color: white; border: none; padding: 12px 24px; font-size: 1rem; font-weight: 700; border-radius: 8px; cursor: pointer; width: 100%; transition: background-color 0.2s; }
+    .btn-submit:hover { background-color: var(--primary-hover); }
+    .btn-danger { background-color: var(--danger); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+    .alert-success { background-color: #e6f4ea; color: var(--success); border: 1px solid #b7e4c7; padding: 12px 16px; border-radius: 8px; margin-top: 14px; display: none; font-weight: 600; font-size: 0.95rem; }
+    .tracking-box { background-color: #f0fdf4; border: 2px solid #bbf7d0; padding: 18px; border-radius: 10px; margin-top: 20px; display: none; }
+    .tracking-box h3 { color: #166534; font-size: 1.05rem; margin-bottom: 8px; }
+  </style>
+</head>
+<body onload="initMapPickupPage()">
+
+  <div class="top-cover-container">
+    <img class="top-cover-img" src="af123bdf-e3b8-4a31-9b4d-8665803bd026_2.jpg" alt="Cover Photo ng Pedicab" />
+  </div>
+
+  <header>
+    <div class="brand">
+      <img class="brand-logo-img" src="294907598_424215026394117_510540427096584683_n.png" alt="Logo ng NEUST" />
+      <div class="brand-text">
+        <h1>CAMPUS PEDICAB</h1>
+        <span>Neust's Pedicab</span>
+      </div>
     </div>
-    <div class="map-display-box">
-      <img id="campus-map" class="map-img" src="Numbered Campus Map Schematic.png" alt="Mapa ng NEUST Sumacab Campus">
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation Menu">&#9776;</button>
+  </header>
+
+  <nav id="main-nav">
+    <a href="index.html" class="nav-btn">Home & Info</a>
+    <a href="map-pickup.html" class="nav-btn active">Campus Map & Pick-up Request</a>
+    <a href="experiences.html" class="nav-btn">Student Experiences</a>
+    <a href="drivers-portal.html" class="nav-btn">Drivers Portal</a>
+  </nav>
+
+  <div class="container">
+    <div class="map-card-wrapper">
+      <div style="margin-bottom: 14px;"><h3>NEUST Sumacab Campus Map</h3></div>
+      <div class="map-display-box">
+        <img id="campus-map" class="map-img" src="Numbered Campus Map Schematic.png" alt="Mapa ng NEUST Sumacab Campus">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Campus Building & Facility Directory</h2>
+      <p style="margin-bottom: 12px; font-size: 0.9rem; color: var(--text-muted);">
+        <strong>Tip:</strong> Click on any building number or name below to automatically select it as your pick-up location!
+      </p>
+
+      <div class="directory-grid">
+        <div class="directory-category">
+          <h4>Administration Building</h4>
+          <table class="directory-table">
+            <thead><tr><th style="width: 50px;">No.</th><th>Facility / Office</th></tr></thead>
+            <tbody>
+              <tr onclick="selectBuilding('Office of Admissions and Registration (#3)')"><td><span class="num-badge">3</span></td><td>Office of Admissions and Registration</td></tr>
+              <tr onclick="selectBuilding('Supply and Property Management (#8)')"><td><span class="num-badge">8</span></td><td>Supply and Property Management</td></tr>
+              <tr onclick="selectBuilding('Administration Bldg. / Cashier (#42)')"><td><span class="num-badge">42</span></td><td>Administration Bldg. / Cashier</td></tr>
+              <tr onclick="selectBuilding('Gate / Guard House (#58)')"><td><span class="num-badge">58</span></td><td>Gate / Guard House</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="pickup-card">
+      <h2 class="card-title">Request a Pedicab Pick-up</h2>
+      <form id="pickup-form" onsubmit="handlePickupSubmit(event)">
+        <div class="form-group">
+          <label for="pickup-student-name">Student Name *</label>
+          <input type="text" id="pickup-student-name" class="form-control" placeholder="e.g., Angela Carrillo" required>
+        </div>
+        <div class="form-group">
+          <label for="pickup-location">Pick-up Location *</label>
+          <input type="text" id="pickup-location" class="form-control" placeholder="Select a building above or type here..." required>
+        </div>
+        <div class="form-group">
+          <label for="pickup-comments">Additional Comments / Instructions for Driver (Optional)</label>
+          <textarea id="pickup-comments" class="form-control" placeholder="e.g., Waiting near the entrance porch."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit Request</button>
+      </form>
+
+      <div id="pickup-alert" class="alert-success">
+        Pick-up request sent successfully! Authorized drivers can now view your request on the dashboard.
+      </div>
+
+      <div id="student-tracking-box" class="tracking-box">
+        <h3>Your Request Status</h3>
+        <p id="tracking-status-text" style="margin-bottom: 10px; font-weight: 600; font-size: 0.95rem;"></p>
+        <button type="button" class="btn-danger" style="padding: 6px 14px; font-size: 0.85rem;" onclick="cancelMyRequest()">Cancel Request</button>
+      </div>
     </div>
   </div>
 
-  <!-- DIRECTORY LIST -->
-  <div class="card">
-    <h2 class="card-title">Campus Building & Facility Directory</h2>
-    <p style="margin-bottom: 12px; font-size: 0.9rem; color: var(--text-muted);">
-      <strong>Tip:</strong> Click on any building number or name below to automatically select it as your pick-up location!
-    </p>
+  <script>
+    function toggleMenu() {
+      document.getElementById('main-nav').classList.toggle('show');
+    }
 
-    <div class="directory-grid">
-      <!-- Administration Building Category -->
-      <div class="directory-category">
-        <h4>Administration Building</h4>
-        <table class="directory-table">
-          <thead><tr><th style="width: 50px;">No.</th><th>Facility / Office</th></tr></thead>
-          <tbody>
-            <tr onclick="selectBuilding('Office of Admissions and Registration (#3)')"><td><span class="num-badge">3</span></td><td>Office of Admissions and Registration</td></tr>
-            <tr onclick="selectBuilding('Supply and Property Management (#8)')"><td><span class="num-badge">8</span></td><td>Supply and Property Management</td></tr>
-            <tr onclick="selectBuilding('Administration Bldg. / Cashier (#42)')"><td><span class="num-badge">42</span></td><td>Administration Bldg. / Cashier</td></tr>
-            <tr onclick="selectBuilding('Gate / Guard House (#58)')"><td><span class="num-badge">58</span></td><td>Gate / Guard House</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    function initMapPickupPage() {
+      checkStudentTrackingState();
+      setInterval(syncStudentTrackingState, 2000);
+    }
 
-  <!-- PICK-UP REQUEST FORM -->
-  <div class="card" id="pickup-card">
-    <h2 class="card-title">Request a Pedicab Pick-up</h2>
-    <form id="pickup-form" onsubmit="handlePickupSubmit(event)">
-      <div class="form-group">
-        <label for="pickup-student-name">Student Name *</label>
-        <input type="text" id="pickup-student-name" class="form-control" placeholder="e.g., Angela Carrillo" required>
-      </div>
-      <div class="form-group">
-        <label for="pickup-location">Pick-up Location *</label>
-        <input type="text" id="pickup-location" class="form-control" placeholder="Select a building above or type here..." required>
-      </div>
-      <div class="form-group">
-        <label for="pickup-comments">Additional Comments / Instructions (Optional)</label>
-        <textarea id="pickup-comments" class="form-control" placeholder="e.g., Waiting near entrance porch."></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Submit Request</button>
-    </form>
+    function getStoredRequests() {
+      const data = localStorage.getItem('pedicab_requests');
+      return data ? JSON.parse(data) : [];
+    }
 
-    <div id="pickup-alert" class="alert-success">
-      Pick-up request sent successfully! Authorized drivers can now view your request on the dashboard.
-    </div>
+    function saveStoredRequests(requests) {
+      localStorage.setItem('pedicab_requests', JSON.stringify(requests));
+    }
 
-    <div id="student-tracking-box" class="tracking-box">
-      <h3>Your Request Status</h3>
-      <p id="tracking-status-text" style="margin-bottom: 10px; font-weight: 600; font-size: 0.95rem;"></p>
-      <button type="button" class="btn-danger" style="padding: 6px 14px; font-size: 0.85rem;" onclick="cancelMyRequest()">Cancel Request</button>
-    </div>
-  </div>
-</section>
+    function selectBuilding(buildingName) {
+      const locationInput = document.getElementById('pickup-location');
+      locationInput.value = buildingName;
+      locationInput.classList.add('highlighted');
+      setTimeout(() => locationInput.classList.remove('highlighted'), 1500);
+      document.getElementById('pickup-card').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handlePickupSubmit(e) {
+      e.preventDefault();
+      const studentName = document.getElementById('pickup-student-name').value.trim();
+      const location = document.getElementById('pickup-location').value.trim();
+      const comments = document.getElementById('pickup-comments').value.trim();
+
+      const newRequestId = 'req-' + Date.now();
+      const newRequest = {
+        id: newRequestId,
+        studentName: studentName,
+        location: location,
+        comments: comments,
+        timestamp: new Date().toLocaleString(),
+        status: 'Pending',
+        assignedDriver: ''
+      };
+
+      const currentRequests = getStoredRequests();
+      currentRequests.unshift(newRequest);
+      saveStoredRequests(currentRequests);
+
+      localStorage.setItem('my_active_request_id', newRequestId);
+      document.getElementById('pickup-alert').style.display = 'block';
+      document.getElementById('pickup-form').reset();
+      setTimeout(() => document.getElementById('pickup-alert').style.display = 'none', 5000);
+      checkStudentTrackingState();
+    }
+
+    function checkStudentTrackingState() {
+      const activeId = localStorage.getItem('my_active_request_id');
+      const trackingBox = document.getElementById('student-tracking-box');
+      const statusText = document.getElementById('tracking-status-text');
+
+      if (!activeId) { if (trackingBox) trackingBox.style.display = 'none'; return; }
+      const requests = getStoredRequests();
+      const myReq = requests.find(r => r.id === activeId);
+
+      if (!myReq) {
+        localStorage.removeItem('my_active_request_id');
+        if (trackingBox) trackingBox.style.display = 'none';
+        return;
+      }
+
+      if (trackingBox) trackingBox.style.display = 'block';
+
+      if (myReq.status === 'Pending') {
+        statusText.innerHTML = `Your request is <strong>Pending</strong>. Waiting for an available driver to accept...`;
+      } else if (myReq.status === 'Accepted') {
+        statusText.innerHTML = `<strong>Driver #${myReq.assignedDriver || 'N/A'} accepted your request!</strong> They are on their way.`;
+      } else if (myReq.status === 'Picked Up') {
+        statusText.innerHTML = `You have been <strong>Picked Up</strong> by Driver #${myReq.assignedDriver || 'N/A'}. Enjoy your ride!`;
+      } else if (myReq.status === 'Completed') {
+        statusText.innerHTML = `Your trip is <strong>Completed</strong>. Thank you for riding Neust's Pedicab!`;
+        setTimeout(() => {
+          localStorage.removeItem('my_active_request_id');
+          if (trackingBox) trackingBox.style.display = 'none';
+        }, 8000);
+      }
+    }
+
+    function syncStudentTrackingState() {
+      if (document.getElementById('student-tracking-box').style.display === 'block') {
+        checkStudentTrackingState();
+      }
+    }
+
+    function cancelMyRequest() {
+      const activeId = localStorage.getItem('my_active_request_id');
+      if (activeId) {
+        let requests = getStoredRequests().filter(r => r.id !== activeId);
+        saveStoredRequests(requests);
+        localStorage.removeItem('my_active_request_id');
+        document.getElementById('student-tracking-box').style.display = 'none';
+        alert('Your pick-up request has been cancelled.');
+      }
+    }
+  </script>
+</body>
+</html>
